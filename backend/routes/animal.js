@@ -13,25 +13,28 @@ const ObjectId = require("mongodb").ObjectId;
 // Get a list of all search and rescue dogs
 Routes.route("/animal").get(function (req, res) {
   let db_connect = db.getDb("RescueAnimals");
-  let query = {$or: [
-    {
-    breed: {$in: ["Laborador Retriever", "Chesapeake Bay Retriever", "Newfoundland"]},
-    gender: "Intact Female",
-    age_weeks: {$gte: 26},
-    age_weeks: {$lte: 156}
-    },
-    {
-      breed: {$in: ["German Shephard", "Alaskan Malamute", "Old English Sheepdog", "Siberian Husky", "Rottweiler"]},
-      gender: "Intact Male",
-      age_weeks: {$gte: 26},
-      age_weeks: {$lte: 156}
+  console.log("heihei")
+  let query = {
+    $or: [
+      {
+        breed: { $in: ["Laborador Retriever", "Chesapeake Bay Retriever", "Newfoundland"] },
+        gender: "Intact Female",
+        age_weeks: { $gte: 26 },
+        age_weeks: { $lte: 156 }
       },
       {
-        breed: {$in: ["German Shephard", "Doberman Pinscher", "Golden Retriever", "Bloodhound", "Rottweiler"]},
+        breed: { $in: ["German Shephard", "Alaskan Malamute", "Old English Sheepdog", "Siberian Husky", "Rottweiler"] },
         gender: "Intact Male",
-        age_weeks: {$gte: 20},
-        age_weeks: {$lte: 300}
-        }]};
+        age_weeks: { $gte: 26 },
+        age_weeks: { $lte: 156 }
+      },
+      {
+        breed: { $in: ["German Shephard", "Doberman Pinscher", "Golden Retriever", "Bloodhound", "Rottweiler"] },
+        gender: "Intact Male",
+        age_weeks: { $gte: 20 },
+        age_weeks: { $lte: 300 }
+      }]
+  };
   db_connect
     .collection("animals")
     .find(query).toArray(function (err, result) {
@@ -47,10 +50,10 @@ Routes.route("/animal/water").get(function (req, res) {
   db_connect
     .collection("animals")
     .find({
-      breed: {$in: ["Laborador Retriever", "Chesapeake Bay Retriever", "Newfoundland"]}, 
+      breed: { $in: ["Laborador Retriever", "Chesapeake Bay Retriever", "Newfoundland"] },
       gender: "Intact Female",
-      age_weeks: {$gte: 26},
-      age_weeks: {$lte: 156}
+      age_weeks: { $gte: 26 },
+      age_weeks: { $lte: 156 }
     })
     .toArray(function (err, result) {
       if (err) throw err;
@@ -64,10 +67,10 @@ Routes.route("/animal/mountain").get(function (req, res) {
   db_connect
     .collection("animals")
     .find({
-      breed: {$in: ["German Shephard", "Alaskan Malamute", "Old English Sheepdog", "Siberian Husky", "Rottweiler"]}, 
+      breed: { $in: ["German Shephard", "Alaskan Malamute", "Old English Sheepdog", "Siberian Husky", "Rottweiler"] },
       gender: "Intact Male",
-      age_weeks: {$gte: 26},
-      age_weeks: {$lte: 156}
+      age_weeks: { $gte: 26 },
+      age_weeks: { $lte: 156 }
     })
     .toArray(function (err, result) {
       if (err) throw err;
@@ -81,10 +84,10 @@ Routes.route("/animal/disaster").get(function (req, res) {
   db_connect
     .collection("animals")
     .find({
-      breed: {$in: ["German Shephard", "Doberman Pinscher", "Golden Retriever", "Bloodhound", "Rottweiler"]}, 
+      breed: { $in: ["German Shephard", "Doberman Pinscher", "Golden Retriever", "Bloodhound", "Rottweiler"] },
       gender: "Intact Male",
-      age_weeks: {$gte: 20},
-      age_weeks: {$lte: 300}
+      age_weeks: { $gte: 20 },
+      age_weeks: { $lte: 300 }
     })
     .toArray(function (err, result) {
       if (err) throw err;
@@ -151,7 +154,7 @@ Routes.route("/update/:id").post(function (req, response) {
   // Get query by object ID
   let query = { _id: ObjectId(req.params.id) };
   new_age = req.body.age;
-  if(req.body.age.length < 7){
+  if (req.body.age.length < 7) {
     new_age = `${req.body.age} Years`;
   }
 

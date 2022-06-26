@@ -9,13 +9,13 @@ export default function AnimalList() {
   useEffect(() => {
     async function getAnimals() {
       let response = ""
-      if(process.env.NODE_ENV === "production"){
+      if (process.env.NODE_ENV === "production") {
         response = await fetch(`/animal/disaster`);
       }
-      else{
+      else {
         response = await fetch("http://localhost:5000/animal/disaster")
       }
-     
+
       // Error handling
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
@@ -34,18 +34,18 @@ export default function AnimalList() {
 
   // This method will delete an animal
   async function deleteAnimal(id) {
-      if(process.env.NODE_ENV === "production"){
-        await fetch(`/${id}`, {
-          method: "DELETE",
-        });
+    if (process.env.NODE_ENV === "production") {
+      await fetch(`/${id}`, {
+        method: "DELETE",
+      });
 
-      }
-      else{
-        await fetch(`http://localhost:5000/${id}`, {
-          method: "DELETE",
-        });
-      }
-  
+    }
+    else {
+      await fetch(`http://localhost:5000/${id}`, {
+        method: "DELETE",
+      });
+    }
+
     // Set new animals
     const newAnimals = animals.filter((el) => el._id !== id);
     setAnimals(newAnimals);
@@ -55,6 +55,8 @@ export default function AnimalList() {
 
   // This method will map out the animals to the cards
   function animalList() {
+    console.log("generate card")
+    console.log(animals)
     return animals.map((animal) => {
       return (
         <Animal
