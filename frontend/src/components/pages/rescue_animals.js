@@ -12,7 +12,7 @@ export default function AnimalList() {
     async function getAnimals() {
       let response = ""
       if (process.env.NODE_ENV === "production") {
-        response = await fetch(`/animal`);
+        response = await fetch(`/animal/all`);
         console.log(1)
       }
       else {
