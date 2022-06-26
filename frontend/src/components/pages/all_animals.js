@@ -42,7 +42,6 @@ export default function CatList() {
     { field: 'age', filter: true, resizable: true, editable: true },
     { field: 'breed', filter: true, resizable: true, editable: true },
     { field: 'color', filter: true, resizable: true, editable: true },
-    { field: 'outcome_type', filter: true, resizable: true, editable: true },
     { field: 'gender', filter: true, resizable: true, editable: true },
     { field: 'location_lat', filter: true, resizable: true, editable: true },
     { field: 'location_long', filter: true, resizable: true, editable: true },
