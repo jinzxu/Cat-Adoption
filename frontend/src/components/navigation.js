@@ -12,37 +12,24 @@ export default function Navigation() {
     <div>
       <nav className="navbar">
         <NavLink className="navbar-logo" to="/">
-          <img style={{ width: 15 + "%" }} src={Logo} alt="logo"></img>
+          <img style={{ width: 30 + "%" }} src={"https://image.16pic.com/00/36/86/16pic_3686512_s.jpg?imageView2/0/format/png"} alt="logo"></img>
         </NavLink>
         <ul>
           <li className="dropdown">
             <button className="dropbtn">
-              Search and Rescue Dogs
+              Jason Xu (jinzxu@ucalgary.ca)
               <i className="fa fa-caret-down" />
             </button>
-            <div className="dropdown-content">
-              <NavLink className="nav-link" to="/">
-                All Search and Rescue
-              </NavLink>
-              <NavLink className="nav-link" to="/mountain">
-                Mountain Rescue
-              </NavLink>
-              <NavLink className="nav-link" to="/water">
-                Water Rescue
-              </NavLink>
-              <NavLink className="nav-link" to="/disaster">
-                Disaster Rescue
-              </NavLink>
-            </div>
+
           </li>
           <li>
             <NavLink className="nav-link" to="/all">
-              All Animals
+              All Cats
             </NavLink>
           </li>
           <li>
             <NavLink className="nav-link" to="/create">
-              Add Animal
+              Add Cat
             </NavLink>
           </li>
         </ul>

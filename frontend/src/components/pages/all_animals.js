@@ -6,12 +6,12 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import "../../styles/table.css"
 
 
-export default function AnimalList() {
-  const [animals, setAnimals] = useState([]);
+export default function CatList() {
+  const [animals, setCats] = useState([]);
   console.log("animal list function")
   // This method fetches the animals from the database.
   useEffect(() => {
-    async function getAnimals() {
+    async function getCats() {
       let response = ""
 
       if (process.env.NODE_ENV === "production") {
@@ -28,10 +28,10 @@ export default function AnimalList() {
       }
 
       const animals = await response.json();
-      setAnimals(animals);
+      setCats(animals);
     }
 
-    getAnimals();
+    getCats();
 
     return;
   }, [animals.length]);
@@ -55,7 +55,7 @@ export default function AnimalList() {
   return (
     <div>
       <div className="header">
-        <h3>All Animals</h3>
+        <h3>All Cats</h3>
       </div>
       <div className="body">
         <div className="ag-theme-alpine" style={{ height: 700, width: 1200 }}>

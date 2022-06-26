@@ -35,26 +35,26 @@ export default function Create() {
     e.preventDefault();
 
     // Add a new animal to the database
-    const newAnimal = { ...form };
+    const newCat = { ...form };
     // Post request to db
-    if(process.env.NODE_ENV === "production"){
+    if (process.env.NODE_ENV === "production") {
       await fetch("/animal/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newAnimal),
+        body: JSON.stringify(newCat),
       }).catch((error) => {
         window.alert(error);
         return;
       });
-    }else{
+    } else {
       await fetch("http://localhost:5000/animal/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newAnimal),
+        body: JSON.stringify(newCat),
       }).catch((error) => {
         window.alert(error);
         return;
@@ -84,13 +84,13 @@ export default function Create() {
   return (
     <div>
       <form className="form-body" onSubmit={onSubmit}>
-        <h3>Add New Animal</h3>
+        <h3>Add New Cat</h3>
 
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            minlength= "1"
+            minlength="1"
             maxlength="40"
             className="form-control"
             id="name"
@@ -104,7 +104,7 @@ export default function Create() {
           <label htmlFor="breed">Breed</label>
           <input
             type="text"
-            minlength= "1"
+            minlength="1"
             maxlength="75"
             className="form-control"
             id="breed"
@@ -210,53 +210,22 @@ export default function Create() {
             onChange={(e) => updateForm({ image: e.target.value })}
           />
         </div>
-        
+
+
         <div className="form-group">
-          <text>Type:</text> 
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="typeOptions"
-              id="typeDog"
-              value="Dog"
-              checked={form.animal_type === "Dog"}
-              onChange={(e) => updateForm({ animal_type: e.target.value })}
-            />
-            <label htmlFor="typeDog" className="form-check-label">
-              Dog
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="typeOptions"
-              id="typeCat"
-              value="Cat"
-              checked={form.animal_type === "Cat"}
-              onChange={(e) => updateForm({ animal_type: e.target.value })}
-            />
-            <label htmlFor="typeCat" className="form-check-label">
-              Cat
-            </label>
-          </div>
-        </div>
-        
-        <div className="form-group">
-          <text>Gender:</text> 
+          <text>Gender:</text>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
               type="radio"
               name="genderOptions"
-              id="typeSpayedFemale"
-              value="Spayed Female"
-              checked={form.gender === "Spayed Female"}
+              id="typeMale"
+              value="Male"
+              checked={form.gender === "Male"}
               onChange={(e) => updateForm({ gender: e.target.value })}
             />
-            <label htmlFor="typeSearchAndRescue" className="form-check-label">
-              Spayed Female
+            <label htmlFor="typeSearchAndAdopt" className="form-check-label">
+              Male
             </label>
           </div>
           <div className="form-check form-check-inline">
@@ -264,107 +233,19 @@ export default function Create() {
               className="form-check-input"
               type="radio"
               name="genderOptions"
-              id="typeIntactFemale"
-              value="Intact Female"
-              checked={form.gender === "Intact Female"}
+              id="typeFemale"
+              value="Female"
+              checked={form.gender === "Female"}
               onChange={(e) => updateForm({ gender: e.target.value })}
             />
-            <label htmlFor="typeIntactFemale" className="form-check-label">
-              Intact Female
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="genderOptions"
-              id="typeNeuteredMale"
-              value="Neutered Male"
-              checked={form.gender === "Neutered Male"}
-              onChange={(e) => updateForm({ gender: e.target.value })}
-            />
-            <label htmlFor="typeNeuteredMale" className="form-check-label">
-              Neutered Male
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="genderOptions"
-              id="typeIntactMale"
-              value="Intact Male"
-              checked={form.gender === "Intact Male"}
-              onChange={(e) => updateForm({ gender: e.target.value })}
-            />
-            <label htmlFor="typeIntactMale" className="form-check-label">
-              Intact Male
-            </label>
-          </div>
-        </div>
-        
-        <div className="form-group">
-          <text>Status:</text> 
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeSearchAndRescue"
-              value="Search and Rescue"
-              checked={form.outcome_type === "Search and Rescue"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeSearchAndRescue" className="form-check-label">
-              Search and Rescue
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeAdoption"
-              value="Adoption"
-              checked={form.outcome_type === "Adoption"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeAdoption" className="form-check-label">
-              Adoption
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeReturnToOwner"
-              value="Return to Owner"
-              checked={form.outcome_type === "Return to Owner"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeReturnToOwner" className="form-check-label">
-              Return to Owner
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeEuthenasia"
-              value="Euthenasia"
-              checked={form.outcome_type === "Euthenasia"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeEuthenasia" className="form-check-label">
-              Euthenasia
+            <label htmlFor="typeFemale" className="form-check-label">
+              Female
             </label>
           </div>
         </div>
 
         <div className="form-group">
-          <text>Reserved:</text> 
+          <text>Adopted:</text>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
@@ -398,7 +279,7 @@ export default function Create() {
         <div className="form-group">
           <input
             type="submit"
-            value="Create animal"
+            value="Create cat"
             className="btn btn-primary"
           />
         </div>

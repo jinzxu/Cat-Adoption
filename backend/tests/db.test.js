@@ -1,5 +1,5 @@
 // Endpoint testing
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 /*
 TODO: Add more test coverage
@@ -7,7 +7,7 @@ TODO: Add more test coverage
 
 // Connection and DB
 let connection;
-let db; 
+let db;
 
 /* Setup and teardown methods*/
 // Connect to the database
@@ -31,77 +31,77 @@ afterAll(async () => {
 
 // Insert tests
 describe('insert', () => {
-  
+
   // Test to insert an object to the database
   it('should insert a doc into collection', async () => {
     // Use the animal collection
     const animals = db.collection("animals");
     // Insert a mock animal into the database
-    const mockAnimal = {name: 'Testing jest 1'};
-    await animals.insertOne(mockAnimal);
+    const mockCat = { name: 'Testing jest 1' };
+    await animals.insertOne(mockCat);
     // Find the new animal in the database
-    const insertedAnimal = await animals.findOne({name: 'Testing jest 1'});
-    expect(insertedAnimal).toEqual(mockAnimal);
+    const insertedCat = await animals.findOne({ name: 'Testing jest 1' });
+    expect(insertedCat).toEqual(mockCat);
   });
 });
 
 // Delete tests
 describe('delete', () => {
-  
+
   // Test to delete an object from the database
   it('should delete a document from the collection', async () => {
     // Use the animals collections
     const animals = db.collection("animals");
     // Add a mock animal to the database
-    const mockAnimal = {name: 'Testing jest 1'};
-    await animals.insertOne(mockAnimal);
+    const mockCat = { name: 'Testing jest 1' };
+    await animals.insertOne(mockCat);
     // Delete the new animal
-    await animals.deleteMany({name: "Testing jest 1"})
+    await animals.deleteMany({ name: "Testing jest 1" })
     // Check that the new animal was deleted
-    const res = await animals.findOne({name: "Testing jest 1"});
+    const res = await animals.findOne({ name: "Testing jest 1" });
     expect(res).toEqual(null);
   })
 })
 
 // Fetch Tests
 describe('Test fetch', () => {
-  
+
   // Test to delete an object from the database
   it('should fetch a document from the collection', async () => {
     // Use the animals collections
     const animals = db.collection("animals");
     // Add a mock animal to the database
-    const mockAnimal = {name: 'Testing jest 1'};
-    await animals.insertOne(mockAnimal);
+    const mockCat = { name: 'Testing jest 1' };
+    await animals.insertOne(mockCat);
     // find the animal
-    const res = await animals.findOne({name: "Testing jest 1"});
-    expect(res).toEqual(mockAnimal);
+    const res = await animals.findOne({ name: "Testing jest 1" });
+    expect(res).toEqual(mockCat);
   })
 })
 
 // Update Tests
 describe('Test update', () => {
-  
+
   // Test to delete an object from the database
   it('should update a document in the collection', async () => {
     // Use the animals collections
     const animals = db.collection("animals");
     // Add a mock animal to the database
-    const mockAnimal = {name: 'Testing jest 1', breed: "Apple"};
-    await animals.insertOne(mockAnimal);
+    const mockCat = { name: 'Testing jest 1', breed: "Apple" };
+    await animals.insertOne(mockCat);
     // find the animal
-    const res = await animals.findOne({name: "Testing jest 1"});
+    const res = await animals.findOne({ name: "Testing jest 1" });
     // Expect the breed to be apple
-    expect(res).toEqual(mockAnimal);
+    expect(res).toEqual(mockCat);
     // Update the breed
-    await animals.updateMany({breed: "Apple"}, {$set: {breed: "Golden Retriever"}});
-    
+    await animals.updateMany({ breed: "Apple" }, { $set: { breed: "Golden Retriever" } });
+
     // The updated animal should equal..
-    newMockAnimal = {name: 'Testing jest 1', breed: "Golden Retriever"};
+    newMockCat = { name: 'Testing jest 1', breed: "Golden Retriever" };
 
     // find the animal
-    const new_res = await animals.findOne({name: "Testing jest 1"});
-    
+    const new_res = await animals.findOne({ name: "Testing jest 1" });
+
     // Expect the breed to be apple
     expect(new_res.breed).toEqual("Golden Retriever");
 

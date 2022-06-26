@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Animal from "../ui/animal_item";
+import Cat from "../ui/animal_item";
 import "../../styles/grid.css";
 
-export default function AnimalList() {
-  const [animals, setAnimals] = useState([]);
+export default function CatList() {
+  const [animals, setCats] = useState([]);
 
   // Fetch the disaster rescue animals from the database
   useEffect(() => {
-    async function getAnimals() {
+    async function getCats() {
       let response = ""
       if (process.env.NODE_ENV === "production") {
         response = await fetch(`/animal/disaster`);
@@ -24,16 +24,16 @@ export default function AnimalList() {
       }
       // Get the animals
       const animals = await response.json();
-      setAnimals(animals);
+      setCats(animals);
     }
 
-    getAnimals();
+    getCats();
 
     return;
   }, [animals.length]);
 
   // This method will delete an animal
-  async function deleteAnimal(id) {
+  async function deleteCat(id) {
     if (process.env.NODE_ENV === "production") {
       await fetch(`/${id}`, {
         method: "DELETE",
@@ -47,8 +47,8 @@ export default function AnimalList() {
     }
 
     // Set new animals
-    const newAnimals = animals.filter((el) => el._id !== id);
-    setAnimals(newAnimals);
+    const newCats = animals.filter((el) => el._id !== id);
+    setCats(newCats);
     // Refresh page
     window.location.reload(true);
   }
@@ -59,9 +59,9 @@ export default function AnimalList() {
     console.log(animals)
     return animals.map((animal) => {
       return (
-        <Animal
+        <Cat
           animal={animal}
-          deleteAnimal={() => deleteAnimal(animal._id)}
+          deleteCat={() => deleteCat(animal._id)}
           key={animal._id}
         />
       );
@@ -71,7 +71,7 @@ export default function AnimalList() {
   return (
     <div>
       <div className="header">
-        <h3>Disaster Rescue Dogs</h3>
+        <h3>Disaster Adopt Cats</h3>
       </div>
       <div className="container">{animalList()}</div>
     </div>

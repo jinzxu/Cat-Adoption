@@ -27,10 +27,10 @@ export default function Edit() {
       const id = params.id.toString();
 
       let response = ""
-      if(process.env.NODE_ENV === "production"){
+      if (process.env.NODE_ENV === "production") {
         response = await fetch(`/animal/${params.id.toString()}`);
       }
-      else{
+      else {
         response = await fetch(`http://localhost:5000/animal/${params.id.toString()}`);
       }
 
@@ -41,7 +41,7 @@ export default function Edit() {
       }
       const animal = await response.json();
       if (!animal) {
-        window.alert(`Animal with id ${id} not found`);
+        window.alert(`Cat with id ${id} not found`);
         navigate("/");
         return;
       }
@@ -62,7 +62,7 @@ export default function Edit() {
   async function onSubmit(e) {
     // Set the default values to the animal' current values
     e.preventDefault();
-    const editedAnimal = {
+    const editedCat = {
       name: form.name,
       age: form.age,
       animal_type: form.animal_type,
@@ -78,25 +78,25 @@ export default function Edit() {
     };
 
     // Update the database.
-    if(process.env.NODE_ENV === "production"){
+    if (process.env.NODE_ENV === "production") {
       await fetch(`/update/${params.id}`, {
         method: "POST",
-        body: JSON.stringify(editedAnimal),
+        body: JSON.stringify(editedCat),
         headers: {
           "Content-Type": "application/json",
         },
       });
     }
-    else{
+    else {
       await fetch(`http://localhost:5000/update/${params.id}`, {
         method: "POST",
-        body: JSON.stringify(editedAnimal),
+        body: JSON.stringify(editedCat),
         headers: {
           "Content-Type": "application/json",
         },
       });
     }
-    
+
     // Naviagte back to search grid
     navigate("/");
     window.location.reload(true);
@@ -106,13 +106,13 @@ export default function Edit() {
   return (
     <div>
       <form className="form-body" onSubmit={onSubmit}>
-        <h3>Edit Animal</h3>
+        <h3>Edit Cat</h3>
 
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            minlength= "1"
+            minlength="1"
             maxlength="40"
             className="form-control"
             id="name"
@@ -126,7 +126,7 @@ export default function Edit() {
           <label htmlFor="breed">Breed</label>
           <input
             type="text"
-            minlength= "1"
+            minlength="1"
             maxlength="75"
             className="form-control"
             id="breed"
@@ -232,53 +232,22 @@ export default function Edit() {
             onChange={(e) => updateForm({ image: e.target.value })}
           />
         </div>
-        
+
+
         <div className="form-group">
-          <text>Type:</text> 
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="typeOptions"
-              id="typeDog"
-              value="Dog"
-              checked={form.animal_type === "Dog"}
-              onChange={(e) => updateForm({ animal_type: e.target.value })}
-            />
-            <label htmlFor="typeDog" className="form-check-label">
-              Dog
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="typeOptions"
-              id="typeCat"
-              value="Cat"
-              checked={form.animal_type === "Cat"}
-              onChange={(e) => updateForm({ animal_type: e.target.value })}
-            />
-            <label htmlFor="typeCat" className="form-check-label">
-              Cat
-            </label>
-          </div>
-        </div>
-        
-        <div className="form-group">
-          <text>Gender:</text> 
+          <text>Gender:</text>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
               type="radio"
               name="genderOptions"
-              id="typeSpayedFemale"
-              value="Spayed Female"
-              checked={form.gender === "Spayed Female"}
+              id="typeMale"
+              value="Mmale"
+              checked={form.gender === "Male"}
               onChange={(e) => updateForm({ gender: e.target.value })}
             />
-            <label htmlFor="typeSearchAndRescue" className="form-check-label">
-              Spayed Female
+            <label htmlFor="typeSearchAndAdopt" className="form-check-label">
+              Male
             </label>
           </div>
           <div className="form-check form-check-inline">
@@ -286,107 +255,19 @@ export default function Edit() {
               className="form-check-input"
               type="radio"
               name="genderOptions"
-              id="typeIntactFemale"
-              value="Intact Female"
-              checked={form.gender === "Intact Female"}
+              id="typeFemale"
+              value="Female"
+              checked={form.gender === "Female"}
               onChange={(e) => updateForm({ gender: e.target.value })}
             />
-            <label htmlFor="typeIntactFemale" className="form-check-label">
-              Intact Female
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="genderOptions"
-              id="typeNeuteredMale"
-              value="Neutered Male"
-              checked={form.gender === "Neutered Male"}
-              onChange={(e) => updateForm({ gender: e.target.value })}
-            />
-            <label htmlFor="typeNeuteredMale" className="form-check-label">
-              Neutered Male
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="genderOptions"
-              id="typeIntactMale"
-              value="Intact Male"
-              checked={form.gender === "Intact Male"}
-              onChange={(e) => updateForm({ gender: e.target.value })}
-            />
-            <label htmlFor="typeIntactMale" className="form-check-label">
-              Intact Male
-            </label>
-          </div>
-        </div>
-        
-        <div className="form-group">
-          <text>Status:</text> 
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeSearchAndRescue"
-              value="Search and Rescue"
-              checked={form.outcome_type === "Search and Rescue"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeSearchAndRescue" className="form-check-label">
-              Search and Rescue
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeAdoption"
-              value="Adoption"
-              checked={form.outcome_type === "Adoption"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeAdoption" className="form-check-label">
-              Adoption
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeReturnToOwner"
-              value="Return to Owner"
-              checked={form.outcome_type === "Return to Owner"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeReturnToOwner" className="form-check-label">
-              Return to Owner
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="statusOptions"
-              id="typeEuthenasia"
-              value="Euthenasia"
-              checked={form.outcome_type === "Euthenasia"}
-              onChange={(e) => updateForm({ outcome_type: e.target.value })}
-            />
-            <label htmlFor="typeEuthenasia" className="form-check-label">
-              Euthenasia
+            <label htmlFor="typeFemale" className="form-check-label">
+              Female
             </label>
           </div>
         </div>
 
         <div className="form-group">
-          <text>Reserved:</text> 
+          <text>Adopted:</text>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input"
@@ -420,7 +301,7 @@ export default function Edit() {
         <div className="form-group">
           <input
             type="submit"
-            value="Edit animal"
+            value="Edit cat"
             className="btn btn-primary"
           />
         </div>

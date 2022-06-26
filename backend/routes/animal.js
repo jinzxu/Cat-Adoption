@@ -12,7 +12,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 // Get a list of all search and rescue dogs
 Routes.route("/animal").get(function (req, res) {
-  let db_connect = db.getDb("RescueAnimals");
+  let db_connect = db.getDb("AdoptCats");
   console.log("heihei")
   let query = {
     $or: [
@@ -46,7 +46,7 @@ Routes.route("/animal").get(function (req, res) {
 
 // Get water rescue dogs
 Routes.route("/animal/water").get(function (req, res) {
-  let db_connect = db.getDb("RescueAnimals");
+  let db_connect = db.getDb("AdoptCats");
   db_connect
     .collection("animals")
     .find({
@@ -63,7 +63,7 @@ Routes.route("/animal/water").get(function (req, res) {
 
 // Get mountain rescue dogs
 Routes.route("/animal/mountain").get(function (req, res) {
-  let db_connect = db.getDb("RescueAnimals");
+  let db_connect = db.getDb("AdoptCats");
   db_connect
     .collection("animals")
     .find({
@@ -80,7 +80,7 @@ Routes.route("/animal/mountain").get(function (req, res) {
 
 // Get disaster rescue dogs
 Routes.route("/animal/disaster").get(function (req, res) {
-  let db_connect = db.getDb("RescueAnimals");
+  let db_connect = db.getDb("AdoptCats");
   db_connect
     .collection("animals")
     .find({
@@ -97,7 +97,7 @@ Routes.route("/animal/disaster").get(function (req, res) {
 
 // Get all shelter animals
 Routes.route("/animal/all").get(function (req, res) {
-  let db_connect = db.getDb("RescueAnimals");
+  let db_connect = db.getDb("AdoptCats");
   db_connect
     .collection("animals")
     .find({})
