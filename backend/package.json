@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "jest": {
+    "preset": "@shelf/jest-mongodb" 
+  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --runInBand ./tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@shelf/jest-mongodb": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "jest-fetch-mock": "^3.0.3",
+    "mongodb": "^4.3.1",
+    "supertest": "^6.2.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "jest": "^27.4.7"
+  }
+}
